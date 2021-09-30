@@ -1,0 +1,67 @@
+{
+  "window.zoomLevel": 0,
+  "editor.fontLigatures": true,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "comment",
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "workbench.colorTheme": "Dracula",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontWeight": "500",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.renderIndentGuides": false,
+  "php.executablePath": "C:\\xampp\\php\\php.exe",
+  "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
+  // config related to code formatting
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.tslint": true,
+    "source.organizeImports": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "prettier.disableLanguages": ["javascript", "javascriptreact"],
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "editor.fontSize": 17,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "prettier.singleQuote": true,
+  "prettier.insertPragma": true,
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.fileDirectoryAsCwd": true,
+  "code-runner.ignoreSelection": true,
+  "code-runner.temporaryFileName": "",
+  "code-runner.runInTerminal": true,
+  "code-runner.showExecutionMessage": false,
+  "code-runner.showRunCommandInEditorContextMenu": false,
+  "code-runner.terminalRoot": "/",
+  "terminal.integrated.fontSize": 17,
+  "json.schemas": [],
+  "files.autoSave": "afterDelay",
+  "C_Cpp.updateChannel": "Insiders",
+  "workbench.panel.defaultLocation": "right",
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "none",
+  "prettier.semi": false,
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorBlinking": "expand",
+  "tabnine.experimentalAutoImports": true,
+  "editor.lineHeight": 34
+}
