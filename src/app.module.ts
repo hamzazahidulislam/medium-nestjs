@@ -38,7 +38,7 @@ import { TagModule } from './tag/tag.module';
       logging:
         process.env.NODE_ENV !== 'production' &&
         process.env.NODE_ENV !== 'test',
-      entities: [],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     TagModule,
   ],
