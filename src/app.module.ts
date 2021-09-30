@@ -1,10 +1,10 @@
+import { AppController } from '@app/app.controller';
+import { AppService } from '@app/app.service';
+import { TagModule } from '@app/tag/tag.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [
