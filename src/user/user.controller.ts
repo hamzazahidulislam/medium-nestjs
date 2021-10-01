@@ -1,4 +1,3 @@
-import { LoginUserDto } from './dto/loginUser.dto';
 import { UserService } from '@app/user/user.service';
 import {
   Body,
@@ -8,6 +7,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser.dto';
+import { LoginUserDto } from './dto/loginUser.dto';
 import { UserResponseInterface } from './types/userResponse.interface';
 
 @Controller()
