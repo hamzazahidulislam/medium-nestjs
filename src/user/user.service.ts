@@ -1,10 +1,12 @@
 import { JWT_SECRET } from '@app/config';
 import { UserEntity } from '@app/user/entites/user.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
+import { LoginUserDto } from './dto/loginUser.dto';
 import { UserResponseInterface } from './types/userResponse.interface';
 
 @Injectable()
@@ -14,10 +16,53 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
+    const userByEmail = await this.userRepository.findOne({
+      email: createUserDto.email,
+    });
+    const userByUsername = await this.userRepository.findOne({
+      username: createUserDto.username,
+    });
+    if (userByEmail || userByUsername) {
+      throw new HttpException(
+        'Email or username are taken',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
     const newUser = new UserEntity();
     Object.assign(newUser, createUserDto);
     console.log('newUser', newUser);
     return await this.userRepository.save(newUser);
+  }
+
+  async login(loginUserDto: LoginUserDto): Promise<UserEntity> {
+    const user = await this.userRepository.findOne(
+      {
+        email: loginUserDto.email,
+      },
+      { select: ['id', 'username', 'email', 'bio', 'image', 'password'] },
+    );
+
+    if (!user) {
+      throw new HttpException(
+        'Credentials are not valid',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    const isPasswordCorrect = await compare(
+      loginUserDto.password,
+      user.password,
+    );
+
+    if (!isPasswordCorrect) {
+      throw new HttpException(
+        'Credentials are not valid',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+
+    delete user.password;
+    return user;
   }
 
   generateJwt(user: UserEntity): string {
