@@ -7,6 +7,7 @@ import { sign } from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { LoginUserDto } from './dto/loginUser.dto';
+import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserResponseInterface } from './types/userResponse.interface';
 
 @Injectable()
@@ -67,6 +68,15 @@ export class UserService {
 
     delete user.password;
     return user;
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    const user = await this.findById(userId);
+    Object.assign(user, updateUserDto);
+    return await this.userRepository.save(user);
   }
 
   generateJwt(user: UserEntity): string {
