@@ -4,7 +4,7 @@ import {
   Column,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn
 } from 'typeorm';
 
 @Entity({ name: 'articles' })
