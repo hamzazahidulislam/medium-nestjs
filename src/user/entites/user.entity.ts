@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ArticleEntity } from '@app/article/article.entity';
+import { ArticleEntity } from '@app/article/entites/article.entity';
 import { hash } from 'bcrypt';
 import {
   BeforeInsert,
