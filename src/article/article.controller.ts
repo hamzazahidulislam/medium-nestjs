@@ -92,6 +92,13 @@ export class ArticleController {
   }
 
   @Put(':slug')
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your Article Updated' })
+  @ApiBody({ type: CreateArticleBody })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe())
   async updateArticle(
