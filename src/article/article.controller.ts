@@ -14,8 +14,16 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+  ApiQuery,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { ArticleService } from './article.service';
-import { CreateArticleDto } from './dto/createArticle.dto';
+import { CreateArticleBody, CreateArticleDto } from './dto/createArticle.dto';
+import { GetArticleQueryDto } from './dto/get-article-query.dto';
 import { ArticleResponseInterface } from './types/articleResponse.interface';
 import { ArticlesResponseInterface } from './types/articlesResponse.interface';
 
@@ -24,14 +32,28 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   @Get()
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your All Article' })
+  @ApiQuery({ type: GetArticleQueryDto })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   async findAll(
     @User('id') currentUserId: number,
-    @Query() query: any,
+    @Query() query: GetArticleQueryDto,
   ): Promise<ArticlesResponseInterface> {
     return await this.articleService.findAll(currentUserId, query);
   }
 
   @Post()
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your Article created' })
+  @ApiBody({ type: CreateArticleBody })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe())
   async create(

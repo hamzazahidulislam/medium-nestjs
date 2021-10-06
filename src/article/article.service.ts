@@ -7,6 +7,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 import { DeleteResult, getRepository, Repository } from 'typeorm';
+import { GetArticleQueryDto } from './dto/get-article-query.dto';
 
 @Injectable()
 export class ArticleService {
@@ -19,7 +20,7 @@ export class ArticleService {
 
   async findAll(
     currentUserId: number,
-    query: any,
+    query: GetArticleQueryDto,
   ): Promise<ArticlesResponseInterface> {
     const queryBuilder = getRepository(ArticleEntity)
       .createQueryBuilder('articles')
