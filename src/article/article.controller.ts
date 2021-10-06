@@ -34,7 +34,7 @@ export class ArticleController {
   @Get()
   @ApiBearerAuth('JWT-auth')
   @ApiOkResponse({ description: 'Your All Article' })
-  @ApiQuery({ type: GetArticleQueryDto })
+  @ApiQuery({})
   @ApiUnauthorizedResponse({
     description: 'Your Token is not valid',
     status: 401,
