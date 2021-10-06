@@ -44,9 +44,7 @@ export class ArticleService {
     queryBuilder.orderBy('articles.createdAt', 'DESC');
 
     const articlesCount = await queryBuilder.getCount();
-    if (query.Client) {
-      console.log(query.Client);
-    }
+
     if (query.limit) {
       queryBuilder.limit(query.limit);
     }

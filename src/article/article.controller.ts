@@ -18,7 +18,6 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiOkResponse,
-  ApiQuery,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ArticleService } from './article.service';
@@ -27,6 +26,13 @@ import { GetArticleQueryDto } from './dto/get-article-query.dto';
 import { ArticleResponseInterface } from './types/articleResponse.interface';
 import { ArticlesResponseInterface } from './types/articlesResponse.interface';
 
+export interface ArticleQuery {
+  tag: string;
+  author: string;
+  limit: number;
+  offset: number;
+}
+
 @Controller('articles')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
@@ -34,7 +40,6 @@ export class ArticleController {
   @Get()
   @ApiBearerAuth('JWT-auth')
   @ApiOkResponse({ description: 'Your All Article' })
-  @ApiQuery({})
   @ApiUnauthorizedResponse({
     description: 'Your Token is not valid',
     status: 401,
