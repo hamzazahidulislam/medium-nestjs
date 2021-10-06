@@ -1,5 +1,11 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional } from 'class-validator';
+
+export enum TaskStatus {
+  OPEN = 'OPEN',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
+}
 
 export class GetArticleQueryDto {
   @IsOptional()
@@ -21,4 +27,9 @@ export class GetArticleQueryDto {
   @IsNotEmpty()
   @ApiPropertyOptional()
   offset: number;
+
+  @IsOptional()
+  @ApiPropertyOptional({ enum: TaskStatus })
+  @IsIn([TaskStatus.OPEN, TaskStatus.IN_PROGRESS, TaskStatus.DONE])
+  status: TaskStatus;
 }
