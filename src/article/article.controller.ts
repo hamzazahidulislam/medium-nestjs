@@ -41,7 +41,7 @@ export class ArticleController {
   })
   async findAll(
     @User('id') currentUserId: number,
-    @Query() query: GetArticleQueryDto,
+    @Query(new ValidationPipe()) query: GetArticleQueryDto,
   ): Promise<ArticlesResponseInterface> {
     return await this.articleService.findAll(currentUserId, query);
   }

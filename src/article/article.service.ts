@@ -46,8 +46,6 @@ export class ArticleService {
     const articlesCount = await queryBuilder.getCount();
 
     if (query.limit) {
-      console.log('limit call');
-
       queryBuilder.limit(query.limit);
     }
 
