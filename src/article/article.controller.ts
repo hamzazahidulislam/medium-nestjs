@@ -115,6 +115,12 @@ export class ArticleController {
   }
 
   @Post(':slug/favorite')
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your Article Favorited' })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   @UseGuards(AuthGuard)
   async addArticleToFavorites(
     @User('id') currentUserId: number,
@@ -128,6 +134,12 @@ export class ArticleController {
   }
 
   @Delete(':slug/favorite')
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your Favorite Article Deleted' })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   @UseGuards(AuthGuard)
   async deleteArticleFromFavorites(
     @User('id') currentUserId: number,
