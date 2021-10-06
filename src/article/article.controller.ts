@@ -68,6 +68,7 @@ export class ArticleController {
   }
 
   @Get(':slug')
+  @ApiOkResponse({ description: 'Your Article' })
   async getSingleArticle(
     @Param('slug') slug: string,
   ): Promise<ArticleResponseInterface> {
@@ -76,6 +77,12 @@ export class ArticleController {
   }
 
   @Delete(':slug')
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your Article Deleted' })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   @UseGuards(AuthGuard)
   async deleteArticle(
     @User('id') currentUserId: number,

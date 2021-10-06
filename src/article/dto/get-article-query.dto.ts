@@ -1,24 +1,24 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class GetArticleQueryDto {
   @IsOptional()
   @IsNotEmpty()
-  @ApiPropertyOptional()
+  @ApiProperty()
   tag: string;
 
   @IsOptional()
   @IsNotEmpty()
-  @ApiPropertyOptional()
+  @ApiProperty()
   author: string;
 
   @IsOptional()
   @IsNotEmpty()
-  @ApiPropertyOptional()
+  @ApiProperty()
   limit: number;
 
   @IsOptional()
   @IsNotEmpty()
-  @ApiPropertyOptional()
+  @ApiProperty()
   offset: number;
 }
