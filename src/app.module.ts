@@ -7,9 +7,10 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthMiddleware } from './user/middlewares/auth.middleware';
 import { ArticleModule } from './article/article.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(ormconfig), TagModule, UserModule, ArticleModule],
+  imports: [TypeOrmModule.forRoot(ormconfig), TagModule, UserModule, ArticleModule, ProfileModule],
   controllers: [AppController],
   providers: [AppService],
 })
