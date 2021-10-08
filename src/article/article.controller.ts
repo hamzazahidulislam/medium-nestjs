@@ -23,6 +23,7 @@ import {
 import { ArticleService } from './article.service';
 import { CreateArticleBody, CreateArticleDto } from './dto/createArticle.dto';
 import { GetArticleQueryDto } from './dto/get-article-query.dto';
+import { getFeedArticleQueryDto } from './dto/get-feed-articles.dto';
 import { ArticleResponseInterface } from './types/articleResponse.interface';
 import { ArticlesResponseInterface } from './types/articlesResponse.interface';
 
@@ -52,10 +53,16 @@ export class ArticleController {
   }
 
   @Get('feed')
+  @ApiBearerAuth('JWT-auth')
+  @ApiOkResponse({ description: 'Your Article Feed' })
+  @ApiUnauthorizedResponse({
+    description: 'Your Token is not valid',
+    status: 401,
+  })
   @UseGuards(AuthGuard)
   async getFeed(
     @User('id') currentUserId: number,
-    @Query() query: any,
+    @Query() query: getFeedArticleQueryDto,
   ): Promise<ArticlesResponseInterface> {
     return await this.articleService.getFeed(currentUserId, query);
   }
