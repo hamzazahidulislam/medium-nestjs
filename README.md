@@ -48,29 +48,73 @@ $ http://localhost:3001/articles?limit=20&offset=0
 # Get profile authentication not required
 $ http://localhost:3001/profiles/hamza2
 
+# Current User Feed authentication not required
+$ http://localhost:3001/articles/feed
+
+# Current User Feed (limit and offset) authentication not required
+$ http://localhost:3001/articles/feed?limit=1&offset=0
+
+# Get profile authentication not required
+$ http://localhost:3001/profiles/hamza2
+
+# Current User authentication is required
+$ http://localhost:3001/user
+
 ```
 
-### POST /auth/signup
+### POST /users
 
-Signup Api: http://localhost:3000/auth/signup
-
-Request body:
-
-    {
-     "username":"hamza",
-     "password":"your_passwod"
-    }
-
-### POST /auth/sigIn
-
-SignIn Api: http://localhost:3000/auth/signin
+Register User: http://localhost:3001/users
 
 Request body:
 
     {
-     "username":"hamza",
-     "password":"your_password"
+     "user":{
+        "username":"hamza2",
+        "email":"hamza2@gmail.com",
+        "password":"123"
+      }
     }
+
+### POST /users/login
+
+User Login: http://localhost:3001/users/login
+
+Request body:
+
+    {
+      "user":{
+        "email":"hamza@gmail.com",
+        "password":"123"
+      }
+    }
+
+### POST /articles authentication is required
+
+Create Article: http://localhost:3001/articles
+
+Request body:
+
+    {
+        "article":{
+            "title":"HOW TO",
+            "description":"ever ",
+            "body":"You have",
+            "tagList":["hamza"]
+        }
+    }
+
+### POST /articles/{slug}/favorite authentication is required
+
+Like Article: http://localhost:3001/articles/{slug}/favorite
+
+No Need Request body:
+
+### POST /profiles/hamza2/follow authentication is required
+
+Follow Profile: http://localhost:3001/profiles/hamza2/follow
+
+No Need Request body:
 
 ## Stay in touch
 
