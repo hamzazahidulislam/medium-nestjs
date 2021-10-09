@@ -123,14 +123,13 @@ Update User: http://localhost:3001/user
 Request body:
 
     {
-        "article":{
-            "title":"HOW TO",
-            "description":"ever ",
-            "body":"You have",
-            "tagList":["hamza"]
+        "user":{
+            "bio":"hi this is bio",
+            "username":"hamza",
+            "email":"hamza@gmail.com",
+            "image": ""
         }
     }
-
 
 ## Stay in touch
 
