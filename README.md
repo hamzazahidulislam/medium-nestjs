@@ -108,13 +108,29 @@ Request body:
 
 Like Article: http://localhost:3001/articles/{slug}/favorite
 
-No Need Request body:
+No Need Request body
 
-### POST /profiles/hamza2/follow authentication is required
+### POST /profiles/{username}/follow authentication is required
 
-Follow Profile: http://localhost:3001/profiles/hamza2/follow
+Follow Profile: http://localhost:3001/profiles/{username}/follow
 
-No Need Request body:
+No Need Request body
+
+### PUT /user authentication is required
+
+Update User: http://localhost:3001/user
+
+Request body:
+
+    {
+        "article":{
+            "title":"HOW TO",
+            "description":"ever ",
+            "body":"You have",
+            "tagList":["hamza"]
+        }
+    }
+
 
 ## Stay in touch
 
