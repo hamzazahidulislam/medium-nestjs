@@ -154,6 +154,8 @@ Dislike Article: http://localhost:3001/articles/{slug}/favorite
 
 UnFollow Profile: http://localhost:3001/profiles/{username}/follow
 
+### Or you want to better view the api then chekout my [with-swagger](https://github.com/hamzazahidulislam/medium-nestjs/tree/with-swagger) banch
+
 ## Stay in touch
 
 - Author - [Hamza Zahidul Islam](https://hamzazahid.com/)
