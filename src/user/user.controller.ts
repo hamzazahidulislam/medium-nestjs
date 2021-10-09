@@ -1,3 +1,4 @@
+import { BackendBackendValidationPipe } from '@app/shared/pipes/backendValidation.pipe';
 import { UserService } from '@app/user/user.service';
 import {
   Body,
@@ -7,7 +8,6 @@ import {
   Put,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -30,7 +30,7 @@ export class UserController {
   @Post('users')
   @ApiCreatedResponse({ description: 'User Registration' })
   @ApiBody({ type: CreateUserBody })
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new BackendBackendValidationPipe())
   async createUser(
     @Body('user') createUserDto: CreateUserDto,
   ): Promise<UserResponseInterface> {
@@ -41,7 +41,7 @@ export class UserController {
   @Post('users/login')
   @ApiCreatedResponse({ description: 'User Login' })
   @ApiBody({ type: LoginUserBody })
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new BackendBackendValidationPipe())
   async login(
     @Body('user') loginDto: LoginUserDto,
   ): Promise<UserResponseInterface> {
