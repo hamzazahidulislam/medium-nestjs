@@ -108,13 +108,9 @@ Request body:
 
 Like Article: http://localhost:3001/articles/{slug}/favorite
 
-No Need Request body
-
 ### POST /profiles/{username}/follow authentication is required
 
 Follow Profile: http://localhost:3001/profiles/{username}/follow
-
-No Need Request body
 
 ### PUT /user authentication is required
 
@@ -130,6 +126,33 @@ Request body:
             "image": ""
         }
     }
+
+### PUT /articles/{slug} authentication is required
+
+Update Article By Slug: http://localhost:3001/articles/{slug}
+
+Request body:
+
+    {
+        "article":{
+            "title":"HOW TO",
+            "description":"ever ",
+            "body":"You have",
+            "tagList":["nestjs","typescript"]
+        }
+    }
+
+### DELETE /articles/{slug} authentication is required
+
+Delete Article by Slug: http://localhost:3001/articles/{slug}
+
+### DELETE /articles/{slug}/favorite authentication is required
+
+Dislike Article: http://localhost:3001/articles/{slug}/favorite
+
+### DELETE /profiles/{username}/follow authentication is required
+
+UnFollow Profile: http://localhost:3001/profiles/{username}/follow
 
 ## Stay in touch
 
