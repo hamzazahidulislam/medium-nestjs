@@ -1,166 +1,80 @@
-## Installation
+[![RealWorld Frontend](https://img.shields.io/badge/realworld-frontend-%23783578.svg)](http://realworld.io)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b0c71b0c-d430-4547-a10e-c84ce57cd2a1/deploy-status)](https://app.netlify.com/sites/angular-realworld/deploys)
 
-```bash
-$ npm install
-```
+# ![Angular Example App](logo.png)
 
-## Running the app
+> ### Angular codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+<a href="https://stackblitz.com/edit/angular-realworld" target="_blank"><img width="187" src="https://github.com/gothinkster/realworld/blob/master/media/edit_on_blitz.png?raw=true" /></a>&nbsp;&nbsp;<a href="https://thinkster.io/tutorials/building-real-world-angular-2-apps" target="_blank"><img width="384" src="https://raw.githubusercontent.com/gothinkster/realworld/master/media/learn-btn-hr.png" /></a>
 
-# production mode
-$ npm run start:prod
-```
+### [Demo](https://angular-realworld.netlify.app/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
+This codebase was created to demonstrate a fully fledged application built with Angular that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more. We've gone to great lengths to adhere to the [Angular Styleguide](https://angular.io/styleguide) & best practices.
 
-# test coverage
-$ npm run test:cov
-```
+Additionally, there is an Angular 1.5 version of this codebase that you can [fork](https://github.com/gothinkster/angularjs-realworld-example-app) and/or [learn how to recreate](https://thinkster.io/angularjs-es6-tutorial).
 
-## How to Use the Medium NestJs
 
-```bash
-# Get All Articles not Required Authentication
-$ http://localhost:3001/articles
+# How it works
 
-# Get Article By Tag
-$ http://localhost:3001/articles?tag=nestjs
+We're currently working on some docs for the codebase (explaining where functionality is located, how it works, etc) but the codebase should be straightforward to follow as is. We've also released a [step-by-step tutorial w/ screencasts](https://thinkster.io/tutorials/building-real-world-angular-2-apps) that teaches you how to recreate the codebase from scratch.
 
-# Get Article By Author
-$ http://localhost:3001/articles?author=hamza
+### Making requests to the backend API
 
-# Get Article By limit and offset
-$ http://localhost:3001/articles?limit=20&offset=0
+For convenience, we have a live API server running at https://conduit.productionready.io/api for the application to make requests against. You can view [the API spec here](https://github.com/GoThinkster/productionready/blob/master/api) which contains all routes & responses for the server.
 
-# Get profile authentication not required
-$ http://localhost:3001/profiles/hamza2
+The source code for the backend server (available for Node, Rails and Django) can be found in the [main RealWorld repo](https://github.com/gothinkster/realworld).
 
-# Current User Feed authentication not required
-$ http://localhost:3001/articles/feed
+If you want to change the API URL to a local server, simply edit `src/environments/environment.ts` and change `api_url` to the local server's URL (i.e. `localhost:3000/api`)
 
-# Current User Feed (limit and offset) authentication not required
-$ http://localhost:3001/articles/feed?limit=1&offset=0
 
-# Get profile authentication not required
-$ http://localhost:3001/profiles/hamza2
+# Getting started
 
-# Current User authentication is required
-$ http://localhost:3001/user
+Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. We use [Yarn](https://yarnpkg.com) to manage the dependencies, so we strongly recommend you to use it. you can install it from [Here](https://yarnpkg.com/en/docs/install), then run `yarn install` to resolve all dependencies (might take a minute).
 
-```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### POST /users
+### Building the project
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-Register User: http://localhost:3001/users
 
-Request body:
+## Functionality overview
 
-    {
-     "user":{
-        "username":"hamza2",
-        "email":"hamza2@gmail.com",
-        "password":"123"
-      }
-    }
+The example application is a social blogging site (i.e. a Medium.com clone) called "Conduit". It uses a custom API for all requests, including authentication. You can view a live demo over at https://angular.realworld.io
 
-### POST /users/login
+**General functionality:**
 
-User Login: http://localhost:3001/users/login
+- Authenticate users via JWT (login/signup pages + logout button on settings page)
+- CRU* users (sign up & settings page - no deleting required)
+- CRUD Articles
+- CR*D Comments on articles (no updating required)
+- GET and display paginated lists of articles
+- Favorite articles
+- Follow other users
 
-Request body:
+**The general page breakdown looks like this:**
 
-    {
-      "user":{
-        "email":"hamza@gmail.com",
-        "password":"123"
-      }
-    }
+- Home page (URL: /#/ )
+    - List of tags
+    - List of articles pulled from either Feed, Global, or by Tag
+    - Pagination for list of articles
+- Sign in/Sign up pages (URL: /#/login, /#/register )
+    - Uses JWT (store the token in localStorage)
+    - Authentication can be easily switched to session/cookie based
+- Settings page (URL: /#/settings )
+- Editor page to create/edit articles (URL: /#/editor, /#/editor/article-slug-here )
+- Article page (URL: /#/article/article-slug-here )
+    - Delete article button (only shown to article's author)
+    - Render markdown from server client side
+    - Comments section at bottom of page
+    - Delete comment button (only shown to comment's author)
+- Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
+    - Show basic user info
+    - List of articles populated from author's created articles or author's favorited articles
 
-### POST /articles authentication is required
 
-Create Article: http://localhost:3001/articles
+<br />
 
-Request body:
-
-    {
-        "article":{
-            "title":"HOW TO",
-            "description":"ever ",
-            "body":"You have",
-            "tagList":["hamza"]
-        }
-    }
-
-### POST /articles/{slug}/favorite authentication is required
-
-Like Article: http://localhost:3001/articles/{slug}/favorite
-
-### POST /profiles/{username}/follow authentication is required
-
-Follow Profile: http://localhost:3001/profiles/{username}/follow
-
-### PUT /user authentication is required
-
-Update User: http://localhost:3001/user
-
-Request body:
-
-    {
-        "user":{
-            "bio":"hi this is bio",
-            "username":"hamza",
-            "email":"hamza@gmail.com",
-            "image": ""
-        }
-    }
-
-### PUT /articles/{slug} authentication is required
-
-Update Article By Slug: http://localhost:3001/articles/{slug}
-
-Request body:
-
-    {
-        "article":{
-            "title":"HOW TO",
-            "description":"ever ",
-            "body":"You have",
-            "tagList":["nestjs","typescript"]
-        }
-    }
-
-### DELETE /articles/{slug} authentication is required
-
-Delete Article by Slug: http://localhost:3001/articles/{slug}
-
-### DELETE /articles/{slug}/favorite authentication is required
-
-Dislike Article: http://localhost:3001/articles/{slug}/favorite
-
-### DELETE /profiles/{username}/follow authentication is required
-
-UnFollow Profile: http://localhost:3001/profiles/{username}/follow
-
-### Or you want to better view the api then chekout my [with-swagger](https://github.com/hamzazahidulislam/medium-nestjs/tree/with-swagger) banch
-
-## Stay in touch
-
-- Author - [Hamza Zahidul Islam](https://hamzazahid.com/)
-- Twitter - [@hamza_zahidul](hhttps://twitter.com/hamza_zahidul)
-
-## License
-
-This Project is licensed under the [MIT licensed](LICENSE).
+[![Brought to you by Thinkster](https://raw.githubusercontent.com/gothinkster/realworld/master/media/end.png)](https://thinkster.io)

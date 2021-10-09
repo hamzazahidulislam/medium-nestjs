@@ -1,11 +1,15 @@
-if (!process.env.IT_TS_NODE) {
-  require('module-alias/register');
-}
-import { AppModule } from '@app/app.module';
-import { NestFactory } from '@nestjs/core';
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
-  await app.listen(3001);
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
 }
-bootstrap();
+
+const bootstrapPromise =  platformBrowserDynamic().bootstrapModule(AppModule);
+
+// Logging bootstrap information
+bootstrapPromise.then(success => console.log(`Bootstrap success`))
+  .catch(err => console.error(err));
