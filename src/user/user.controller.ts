@@ -1,3 +1,4 @@
+import { BackendValidationPipe } from '@app/shared/pipes/backendValidation.pipe';
 import { UserService } from '@app/user/user.service';
 import {
   Body,
@@ -30,7 +31,7 @@ export class UserController {
   }
 
   @Post('users/login')
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new BackendValidationPipe())
   async login(
     @Body('user') loginDto: LoginUserDto,
   ): Promise<UserResponseInterface> {
