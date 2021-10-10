@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "7e123d6b-6cec-46e0-9f04-08e67be89be5",
+		"name": "Medium Nestjs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":{\r\n        \"username\":\"hamza2\",\r\n        \"email\":\"hamza2@gmail.com\",\r\n        \"password\":\"123\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/users"
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"TOKEN\",pm.response.json().user.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":{\r\n        \"email\":\"hamza@gmail.com\",\r\n        \"password\":\"123\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":{\r\n        \"bio\":\"hi this is bio\",\r\n        \"username\":\"hamza\",\r\n        \"email\":\"hamza@gmail.com\",\r\n        \"image\": \"\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/user"
+			},
+			"response": []
+		},
+		{
+			"name": "Current User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/user"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Article",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"article\":{\r\n        \"title\":\"HOW TO\",\r\n        \"description\":\"ever \",\r\n        \"body\":\"You have\",\r\n        \"tagList\":[\"hamza\"]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/articles"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Article by slug",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/articles/how-to-gevjj8"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Article by slug",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3001/articles/how-to-gevjj8"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Article by slug",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"article\":{\r\n        \"title\":\"HOW TO\",\r\n        \"description\":\"ever \",\r\n        \"body\":\"You have\",\r\n        \"tagList\":[\"nestjs\",\"typescript\"]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/articles/how-to-b9tjnl"
+			},
+			"response": []
+		},
+		{
+			"name": "Get ALL Articles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/articles"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Article By Tag",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/articles?tag=nestjs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"articles"
+					],
+					"query": [
+						{
+							"key": "tag",
+							"value": "nestjs"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Articales by author",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/articles?author=hamza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"articles"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "hamza"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Articles by limit and offset",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/articles?limit=20&offset=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"articles"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Article",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:3001/articles/how-to-b4umih/favorite"
+			},
+			"response": []
+		},
+		{
+			"name": "Dislike Article",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3001/articles/how-to-b4umih/favorite"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/profiles/hamza2"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:3001/profiles/hamza2/follow"
+			},
+			"response": []
+		},
+		{
+			"name": "UnFollow Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3001/profiles/hamza2/follow"
+			},
+			"response": []
+		},
+		{
+			"name": "Current User Feed",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/articles/feed"
+			},
+			"response": []
+		},
+		{
+			"name": "Current User Feed by limit and offset",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/articles/feed?limit=1&offset=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"articles",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
